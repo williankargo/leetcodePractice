@@ -14,18 +14,19 @@ class Solution {
         int left = 0;
         int right = nums.length - 1;
 
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0, j = nums.length - 1; i < nums.length; i++) {
 
             if (nums[i] < pivot) {
                 ans[left] = nums[i];
                 left++;
             }
 
-            int j = nums.length - 1 - i; // (nums.length - 1) => last index, 如果i往右前進一個，j也往左前進一個，小於pivot不打緊，因為i最後還是會遍歷到
+            // 如果i往右前進一個，j也往左前進一個，小於pivot不打緊，因為i最後還是會遍歷到
             if (nums[j] > pivot) {
                 ans[right] = nums[j];
                 right--;
             }
+            j--;
         }
 
         // 剩下沒有填的就是pivot
