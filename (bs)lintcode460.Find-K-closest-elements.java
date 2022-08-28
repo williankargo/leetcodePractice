@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -9,26 +9,32 @@ import java.util.List;
 
 // @lc code=start
 class Solution {
+    // Time O(logn + k)
+    // Space O(k)
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
 
         int left = findSmallerThanTargetButBiggest(arr, x);
         int right = left + 1;
 
-        // fixed size List
-        List<Integer> ans = Arrays.asList(new Integer[k]);
+        int l = right; // 預防 l 都不會被用到
+        int r = left; // 預防 r 都不會被用到
+
         for (int i = 0; i < k; i++) {
             if (isLeftCloser(arr, left, right, x)) {
-                // set value in List ,(not ans.get(i) = arr[left])
-                ans.set(i, arr[left]);
+                l = left;
                 left--;
             } else {
-                ans.set(i, arr[right]);
+                r = right;
                 right++;
             }
         }
 
-        // Arrays.sort(ans); ==> can only sort int[] ans
-        // Collections.sort(ans); // ==> can sort List and int[]
+        List<Integer> ans = new ArrayList<Integer>();
+        while (l <= r) {
+            // List add value
+            ans.add(arr[l]);
+            l++;
+        }
 
         return ans;
     }
@@ -72,8 +78,7 @@ class Solution {
             return true;
         }
 
-        // todo
-        return (arr[left] - target) >= (target - arr[right]);
+        return Math.abs(target - arr[left]) <= Math.abs(arr[right] - target);
     }
 }
 // @lc code=end
