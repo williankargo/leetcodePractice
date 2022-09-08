@@ -5,6 +5,7 @@ class Solution {
         return result.minNode;
     }
 
+    // divide and conquer
     private ResultType helper(TreeNode root) {
         // 3. 出口
         if (root == null) {

@@ -1,9 +1,14 @@
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Queue;
+import java.util.Set;
+
 // int version 1 - 時間複雜度優化
 // Time: O(length * amount)
 // Space: O(length * amount)
 class Solution1 {
 
-    int INF = Integer.MAX_VALUE >> 4; // 左乘右除，左移四位防暴掉
+    int INF = Integer.MAX_VALUE >> 4; // 左乘右除，右移四位防暴掉
 
     public int coinChange(int[] coins, int amount) {
 
@@ -39,7 +44,6 @@ class Solution1 {
         return dp[length][amount] != INF ? dp[length][amount] : -1;
     }
 }
-
 
 // int version 2 - 時間複雜度 + 空間複雜度 優化
 // Time: O(length * amount)
@@ -80,5 +84,51 @@ class Solution2 {
         // 3. return
         // ！要注意有無效值出現的可能性！
         return dp[amount] != INF ? dp[amount] : -1; // dp[length][amount]
+    }
+}
+
+// BFS version
+class Solution3 {
+
+    // Time: O(N + E) N: # of node / E: # of edge
+    public int coinChange(int[] coins, int amount) {
+
+        if (coins == null || coins.length == 0 || amount == 0) {
+            return 0;
+        }
+
+        Queue<Integer> queue = new ArrayDeque<>();
+        Set<Integer> set = new HashSet<>();
+
+        queue.offer(amount);
+        set.add(amount);
+
+        int layer = 0;
+        while (!queue.isEmpty()) {
+
+            // 分層：同層
+            int queueSize = queue.size();
+            for (int i = 0; i < queueSize; i++) { // cost time to iterate edge
+
+                int current = queue.poll();
+                if (current == 0) {
+                    return layer;
+                }
+                if (current < 0) {
+                    continue;
+                }
+
+                for (int coin : coins) {
+                    int neighbor = current - coin;
+                    if (neighbor >= 0 && !set.contains(neighbor)) {
+                        queue.offer(neighbor); // cost time to add node
+                        set.add(neighbor);
+                    }
+                }
+            }
+            layer++;
+        }
+
+        return -1;
     }
 }

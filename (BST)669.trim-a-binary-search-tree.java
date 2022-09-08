@@ -28,6 +28,7 @@ class TreeNode {
 class Solution {
 
     // 修剪出在範圍內的樹
+    // divide and conquer
     public TreeNode trimBST(TreeNode root, int low, int high) {
 
         // 0.
@@ -40,10 +41,9 @@ class Solution {
             return trimBST(root.right, low, high);
         } else if (root.val > high) {
             return trimBST(root.left, low, high);
-        } else {
-            root.left = trimBST(root.left, low, high);
-            root.right = trimBST(root.right, low, high);
-        }
+
+        root.left = trimBST(root.left, low, high);
+        root.right = trimBST(root.right, low, high);
 
         return root;
     }

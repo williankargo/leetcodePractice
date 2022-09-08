@@ -33,7 +33,7 @@ class Solution {
             return root;
         }
 
-        // 1. 想做後的大局
+        // 1. 想最後的大局
         if (val < root.val) {
             root = searchBST(root.left, val);
         } else {
