@@ -13,7 +13,7 @@
 class Solution {
 
     // recursion method
-    // Time: O(2^(N-1)) 一半的BST
+    // Time: O(2^(N-1)) 一半的BST ， 深度為N
     // Space: O(2^(N-1))
     public TreeNode insertNode(TreeNode root, TreeNode node) {
 
