@@ -8,7 +8,7 @@ import java.util.Queue;
 import java.util.Set;
 
 class Solution {
-
+List<String> wordList
     // BFS(找最短路徑) + DFS(找所有結果)
     // Time: O(V+E) *bfs找neighbor時會產生E O(size(dict)) *dfs最壞情況遍歷全字典
     // Space: O(size(dict) * k) ＊註
@@ -51,7 +51,7 @@ class Solution {
             for (String neighbor : findNeighbor(current, dict)) {
 
                 if (!distance.containsKey(neighbor) || distance.get(neighbor) == distance.get(current) + 1) {
-                    // 還沒有被訪問過，或被訪問過但是current下一步就是neighbor(不然如果用純bfs找不到兩個current相交童neighbor)
+                    // 還沒有被訪問過，或被訪問過但是current下一步就是neighbor(不然如果用純bfs找不到兩個current相交同neighbor)
                     route.get(current).add(neighbor);
                 }
 

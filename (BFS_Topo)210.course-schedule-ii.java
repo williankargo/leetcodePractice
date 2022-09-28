@@ -20,7 +20,7 @@ class Solution {
 
         // 構建圖
         List[] graph = new ArrayList[numCourses]; // List[] => 把List當成一個屬性，想 int[]
-        // 圖的初始化
+        // 0. 圖的初始化
         for(int i = 0; i < numCourses; i++) {
             graph[i] = new ArrayList();
         }

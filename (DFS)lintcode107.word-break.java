@@ -5,7 +5,7 @@ import java.util.Set;
 class Solution {
 
     // DFS + Memo
-    // Time: O(N * N * L), N is the length of s, L is the length of wordSet
+    // Time: O(N * L), N為狀態數，L為最大詞長，也就是O(狀態總數*計算每個狀態的時間耗費)
     // Space: O(N), recursion depth: N (層數不代表次數)，此題會StackOverFlow
 
     public boolean wordBreak(String s, Set<String> wordSet) {
@@ -39,7 +39,7 @@ class Solution {
 
         // 2. decide
         memo.put(sIndex, false);
-        for (int i = sIndex + 1; i <= s.length(); i++) {
+        for (int i = sIndex + 1; i <= s.length(); i++) { // <= : the final case
 
             if (i - sIndex > longest) {
                 break;

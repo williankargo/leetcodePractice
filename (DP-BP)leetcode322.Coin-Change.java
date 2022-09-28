@@ -91,6 +91,7 @@ class Solution2 {
 class Solution3 {
 
     // Time: O(N + E) N: # of node / E: # of edge
+    // 目前剩餘量當node
     public int coinChange(int[] coins, int amount) {
 
         if (coins == null || coins.length == 0 || amount == 0) {

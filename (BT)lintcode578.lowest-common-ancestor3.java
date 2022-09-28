@@ -1,4 +1,4 @@
-class Solution {
+class Solution1 {
 
     // https://www.lintcode.com/problem/578/
     public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode A, TreeNode B) {
@@ -62,5 +62,49 @@ class TreeNode {
     public TreeNode(int val) {
         this.val = val;
         this.left = this.right = null;
+    }
+}
+
+// new version
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution2 {
+
+    // Time: O(# of recursion)
+    // Space: O(# of recursion)
+    // divide and conquer
+    // find lowest common ancestor
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+        // exit
+        if (root == null) {
+            return null;
+        }
+        if (root == p || root == q) {
+            return root;
+        }
+
+        // left and right
+        TreeNode leftNode = lowestCommonAncestor(root.left, p, q);
+        TreeNode rightNode = lowestCommonAncestor(root.right, p, q);
+
+        if (leftNode != null && rightNode != null) {
+            return root;
+        }
+        if (leftNode != null) {
+            return leftNode;
+        }
+        if (rightNode != null) {
+            return rightNode;
+        }
+
+        return null;
     }
 }
