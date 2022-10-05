@@ -65,3 +65,37 @@ class Solution {
         return (point.x - origin.x) * (point.x - origin.x) + (point.y - origin.y) * (point.y - origin.y);
     }
 }
+
+// leetcode version
+class Solution2 {
+
+    // TC: O(NlogK)
+    // SC: O(k)
+    public int[][] kClosest(int[][] points, int k) {
+
+        // DESC
+        Queue<double[]> queue = new PriorityQueue<double[]>(
+                (o1, o2) -> (o2[2] - o1[2]) >= 0 ? 1 : -1 // 注意！return必須是int!
+        );
+
+        for (int i = 0; i < points.length; i++) {
+            int x = points[i][0];
+            int y = points[i][1];
+            double distance = Math.pow(Math.pow(x, 2) + Math.pow(y, 2), 0.5);
+
+            queue.offer(new double[] { x, y, distance });
+            if (queue.size() > k) {
+                queue.poll();
+            }
+        }
+
+        int[][] ans = new int[k][2];
+        for (int i = k - 1; i >= 0; i--) {
+            double[] curr = queue.poll();
+            ans[i][0] = (int) curr[0];
+            ans[i][1] = (int) curr[1];
+        }
+
+        return ans;
+    }
+}

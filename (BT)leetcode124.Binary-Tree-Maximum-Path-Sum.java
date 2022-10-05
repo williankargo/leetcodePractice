@@ -15,6 +15,8 @@ import javax.swing.tree.TreeNode;
  * }
  * }
  */
+
+ // similar to leetcode 543
 class Solution {
 
     // Time: O(N)
