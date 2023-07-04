@@ -1,46 +1,31 @@
-/*
- * @lc app=leetcode id=283 lang=java
- *
- * [283] Move Zeroes
- */
-
-// @lc code=start
-
-// Time: N
-// Space: 1
-// 同向雙指針
 class Solution {
+
+    // TC: O(N)
+    // SC: O(1)
+    // 畫圖理解
     public void moveZeroes(int[] nums) {
-        
-        int fillPointer = 0;
-        int movePointer = 0;
 
-        while (movePointer < nums.length) {
+        int l = 0; // stay to replace with non-zero
+        int r = 0; // explore the front
 
-
-            if (nums[movePointer] == 0) {
-                // fillPointer要留在原地待命
+        while (r < nums.length){
+ 
+            if (nums[r] == 0){
+                // r移動，l待命
+                r++;
             } else {
-                // 如果兩指針所指的東西不一樣，代表fillPointer在待命要swap
-                if (nums[movePointer] != nums[fillPointer]) {
-                    //int temp = nums[fillPointer];
-                    nums[fillPointer] = nums[movePointer];
-                    //nums[movePointer] = temp;
-                }
-                fillPointer++;
+                // 更新l的值
+                nums[l] = nums[r];
+                // r, l 一起移動
+                r++;
+                l++;
             }
-            movePointer++;
         }
 
-        // faster way
-        while(fillPointer < nums.length){
-            if (nums[fillPointer] != 0) {
-                nums[fillPointer] = 0;
-            }
-            fillPointer++;
+        // 填補0
+        while (l < nums.length){
+            nums[l] = 0;
+            l++;
         }
-        
     }
 }
-// @lc code=end
-

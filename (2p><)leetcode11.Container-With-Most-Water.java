@@ -18,7 +18,7 @@ class Solution {
             int tall = Math.min(height[left], height[right]);
             maxVol = Math.max(maxVol, width * tall);
             if (height[left] < height[right]) {
-                left++;
+                left++;  // 這種情況下，l往前移動有可能會讓面積更大，r往後移動不可能讓面積變大
             } else {
                 right--;
             }
