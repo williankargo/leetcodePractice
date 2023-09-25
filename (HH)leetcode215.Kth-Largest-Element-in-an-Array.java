@@ -1,5 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Random;
 
 // heap version
 // Time: O(NLogK)
@@ -26,3 +29,44 @@ class Solution1 {
 }
 
 // quick-select version
+// TC: O(N) worst O(N^2)
+// SC: O(N)
+class Solution2 {
+    public int findKthLargest(int[] nums, int k) {
+
+        List<Integer> list = new ArrayList<>();
+        for (int num : nums) {
+            list.add(num);
+        }
+
+        return quickSelect(list, k);
+    }
+
+    private int quickSelect(List<Integer> list, int k) {
+
+        int pivotIndex = new Random().nextInt(list.size());
+        int pivot = list.get(pivotIndex);
+
+        List<Integer> left = new ArrayList<>();
+        List<Integer> mid = new ArrayList<>();
+        List<Integer> right = new ArrayList<>();
+
+        for (int num : list) {
+            if (num > pivot) {
+                left.add(num);
+            } else if (num < pivot) {
+                right.add(num);
+            } else if (num == pivot) {
+                mid.add(num);
+            }
+        }
+
+        if (k <= left.size()) {
+            return quickSelect(left, k);
+        } else if (k > left.size() + mid.size()) {
+            return quickSelect(right, k - (left.size() + mid.size())); // no need this 2 big list
+        }
+
+        return pivot;
+    }
+}
