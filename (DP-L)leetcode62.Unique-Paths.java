@@ -28,3 +28,31 @@ class Solution {
         return dp[n - 1][m - 1];
     }
 }
+
+
+// TC: O(N)
+// SC: O(N)
+class Solution2 {
+    public int uniquePaths(int m, int n) {
+
+        // 0.
+
+        // 1.
+        int[][] graphs = new int[m][n];
+
+        // 2.
+        for (int[] graph : graphs){
+            Arrays.fill(graph, 1);
+        }
+
+        // 3.
+        for (int i = 1; i < m; i++){
+            for (int j = 1; j < n; j++){
+                graphs[i][j] = graphs[i - 1][j] + graphs[i][j - 1];
+            }
+        }
+
+        // 4.
+        return graphs[m - 1][n - 1];
+    }
+}
