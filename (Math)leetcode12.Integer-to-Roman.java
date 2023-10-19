@@ -19,3 +19,27 @@ class Solution {
     }
 
 }
+
+// Solution 2
+// solution: https://www.youtube.com/watch?v=ohBNdSJyLh8&ab_channel=NeetCode
+// TC: O(N)
+// SC: O(1)
+class Solution2 {
+    public String intToRoman(int num) {
+
+        int[] number = new int[]{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] symbol = new String[]{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+        String ans = "";
+        for (int i = 0; i < number.length; i++){
+            int val = num / number[i];
+            if (val == 0){
+                continue;
+            }
+            ans += symbol[i].repeat(val);
+            num %= number[i];
+        }
+
+        return ans;
+    }
+}

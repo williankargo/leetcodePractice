@@ -63,3 +63,35 @@ class Solution {
         return sum;
     }
 }
+
+// Solution 2
+// solution: https://www.youtube.com/watch?v=3jdxYj3DD98&ab_channel=NeetCode
+// TC: O(N)
+// SC: O(1)
+class Solution2 {
+
+    public int romanToInt(String s) {
+        
+        Map<Character, Integer> values = new HashMap<>();
+        values.put('M', 1000);
+        values.put('D', 500);
+        values.put('C', 100);
+        values.put('L', 50);
+        values.put('X', 10);
+        values.put('V', 5);
+        values.put('I', 1);
+
+        // small -> big: minus
+        // big -> small: add
+        int ans = 0;
+        for (int i = 0; i < s.length(); i++){
+            if (i + 1 < s.length() && values.get(s.charAt(i)) < values.get(s.charAt(i + 1))){
+                ans -= values.get(s.charAt(i));
+            } else {
+                ans += values.get(s.charAt(i));
+            }
+        }
+
+        return ans;
+    }
+}

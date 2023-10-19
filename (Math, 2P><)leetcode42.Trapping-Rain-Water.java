@@ -55,21 +55,21 @@ class Solution2 {
     // https://www.youtube.com/watch?v=StH5vntauyQ
     public int trap(int[] height) {
 
-        // init leftP and rightP
-        int leftP = 0, rightP = height.length - 1;
-        int leftWall = height[leftP], rightWall = height[rightP];
+        int LP = 0;
+        int RP = height.length - 1;
+        int maxLeftWall = height[LP];
+        int maxRightWall = height[RP];
         int ans = 0;
 
-        while (leftP < rightP) {
-            if (leftWall < rightWall) {
-                leftP++;
-                leftWall = Math.max(leftWall, height[leftP]); // check if wall height is smaller than current point
-                ans += (leftWall - height[leftP]);
+        while (LP < RP) {
+            if (height[LP] < height[RP]) {
+                LP++;
+                ans += Math.max(maxLeftWall - height[LP], 0);
+                maxLeftWall = Math.max(maxLeftWall, height[LP]);
             } else {
-                // reverse thinking
-                rightP--;
-                rightWall = Math.max(rightWall, height[rightP]);
-                ans += (rightWall - height[rightP]);
+                RP--;
+                ans += Math.max(maxRightWall - height[RP], 0);
+                maxRightWall = Math.max(maxRightWall, height[RP]);
             }
         }
 
