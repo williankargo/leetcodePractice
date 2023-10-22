@@ -1,30 +1,20 @@
-/*
- * @lc app=leetcode id=28 lang=java
- *
- * [28] Implement strStr()
- */
-
-// O(n^2)
+// TC: O(haystackLength * needleLength)
+// SC: O(1)
 class Solution {
     public int strStr(String haystack, String needle) {
-        if (needle == null || needle.equals("")) {
-            return 0;
+
+        int needleIndex = 0;
+        for (int i = 0; i < haystack.length() - needle.length() + 1; i += 1) { // optimize iteration length
+            needleIndex = 0;
+            while (needleIndex < needle.length() &&
+                    haystack.charAt(i + needleIndex) == needle.charAt(needleIndex)) {
+                if (needleIndex == needle.length() - 1) {
+                    return i;
+                }
+                needleIndex++;
+            }
         }
 
-        for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
-            boolean answer = true;
-            for (int j = 0; j < needle.length(); j++) {
-                if (haystack.charAt(i + j) != needle.charAt(j)) {
-                    answer = false;
-                    break; // only breaks inner for loop
-                }
-            }
-            if (answer) {
-                return i; // find the first index
-            }
-        }
         return -1;
     }
 }
-// @lc code=end
-

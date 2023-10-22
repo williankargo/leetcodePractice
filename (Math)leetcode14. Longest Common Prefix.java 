@@ -1,0 +1,22 @@
+
+// Solution 1
+// TC: O(MN)
+// SC: O(1)
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        
+        String ans = "";
+        for (int i = 0; i < strs[0].length(); i++){
+            for (String str : strs){
+                // 不能用 && 因爲用了會前後一起檢查，如果用 || 如果前面滿足就不會檢查後面了
+                if (i >= str.length() || str.charAt(i) != strs[0].charAt(i)){
+                    return ans;
+                }
+            }
+            ans += strs[0].charAt(i);
+        }
+
+        return ans;
+    }
+}
+
