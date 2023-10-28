@@ -1,8 +1,10 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 // https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&mid=2247484130&idx=6&sn=6a6fd8a208ccd7f0b7d706a3ff5900d7&chksm=fd9ca9fdcaeb20eb43980e8c841294d8b366fdbc128dacf140a93740221691ba241fe4593501&scene=178&cur_album_id=1748659352518868992#rd
-class Solution {
+class Solution1 {
 
     // 同向雙指針
     // Time: O(N)
@@ -45,5 +47,39 @@ class Solution {
         }
 
         return maxLength;
+    }
+}
+
+// solution 2 (my optimal version)
+// TC: O(N)
+// SC: O(N)
+class Solution2 {
+    public int lengthOfLongestSubstring(String s) {
+
+        if (s.length() == 0 || s == null) {
+            return 0;
+        }
+
+        int j = 0;
+        Set<Character> set = new HashSet<>();
+        int amount = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            while (j < s.length() && !set.contains(s.charAt(j))) {
+                set.add(s.charAt(j));
+                j++;
+            }
+
+            if (j < s.length()) {
+                amount = Math.max(amount, j - i);
+            } else {
+                return Math.max(amount, j - i);
+            }
+
+            set.remove(s.charAt(i));
+        }
+
+        return amount;
     }
 }
