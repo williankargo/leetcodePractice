@@ -1,27 +1,29 @@
 import java.util.Stack;
-import java.util.TreeMap;
 
+// TC: O(1)
+// SC: O(N)
 class MinStack {
 
     Stack<Integer> stack;
-    TreeMap<Integer, Integer> valueToCount;
+    Stack<Integer> minStack;
 
     public MinStack() {
         stack = new Stack<>();
-        valueToCount = new TreeMap<>();
+        minStack = new Stack<>();
     }
 
     public void push(int val) {
         stack.push(val);
-        valueToCount.put(val, valueToCount.getOrDefault(val, 0) + 1);
+        if (minStack.isEmpty() || val <= minStack.peek()) {
+            minStack.push(val);
+        }
     }
 
     public void pop() {
-        Integer item = stack.pop();
-        valueToCount.put(item, valueToCount.get(item) - 1);
-        if (valueToCount.get(item) == 0) {
-            valueToCount.remove(item);
+        if (stack.peek().equals(minStack.peek())) {
+            minStack.pop();
         }
+        stack.pop();
     }
 
     public int top() {
@@ -29,7 +31,7 @@ class MinStack {
     }
 
     public int getMin() {
-        return valueToCount.firstKey();
+        return minStack.peek();
     }
 }
 
